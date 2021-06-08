@@ -1,18 +1,21 @@
 import React, {Component} from 'react';
 import{
-  View,
-  Button,
+
+ 
 
 } from 'react-native'
 import Screen_Import from "./Screens/Screen_Import"
+import Screen_ViewImported from './Screens/Screen_ViewImported'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
-
+import AcercaDe from './Screens/AcercaDe.js'
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+const Stack= createStackNavigator();
 export default class App extends Component {
   constructor(props){
     super(props);
     this.state={
-
      
     }
 }
@@ -78,13 +81,17 @@ this.setState({
   render(){
  
     return (
+    <NavigationContainer>
+     <Stack.Navigator screenOptions={{
+       headerStyle: {backgroundColor: 'grey'},
+       headerTintColor: 'white'
+       }}>
+     <Stack.Screen name="Importar Tarjetas" component={Screen_Import}/>
+       <Stack.Screen name="Ver tarjetas Importadas" component={Screen_ViewImported}/>
+      
+  </Stack.Navigator>
+  </NavigationContainer>
     
-      <View style={{flex:1}}>
-      <View style={{flex:1, position: 'absolute', right: 20, top: 30}}>
-      <Button title= 'MENU' style={{margin: 200}}></Button>
-      </View>
-     <Screen_Import/>
-      </View>
     
     );
   }
