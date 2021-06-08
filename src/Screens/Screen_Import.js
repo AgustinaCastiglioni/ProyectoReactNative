@@ -32,7 +32,7 @@ componentDidMount(){
     fetch('https://randomuser.me/api/?results=10')
     .then(response=> response.json())
     .then((result)=>{
-      this.setState({users: result.results})
+      this.setState({users: result.results, activity: false})
 
       console.log(users)
     })
@@ -86,9 +86,6 @@ componentDidMount(){
              Fecha de Nacimiento: {item.dob.date}
              </Text>
              </View>
-            
-             <Button  title= 'BORRAR TARJETA' onPress={()=>this.mostrarDetalle('visible')}></Button>
-               
                             </TouchableOpacity>   
                       
       )
