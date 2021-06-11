@@ -8,6 +8,7 @@ Image,
 StyleSheet,
 FlatList,
 ActivityIndicator,
+Alert,
 
 
 
@@ -25,12 +26,13 @@ export default class AcercaDe extends Component {
      importedUsers:[],
      display: 'none',
      showModal: false,
-     selectedItem: null
+     selectedItem: null,
+     cleanUsers:[]
 
     }
   }
 componentDidUpdate(){
-  console.log(this.state.importedUsers)
+ 
 }
 async getData(){
     try{
@@ -43,6 +45,16 @@ console.log(this.state.importedUsers)
     }
 }
 
+//componentDidMount(){
+ // this.unsuscribe= this.props.navigation.addListener('focus', ()=>{
+  //  this.getData();
+  //})
+
+//}
+
+//componentWillUnmount(){
+  //this.unsuscribe()
+//}
 
 showModal(item){
   this.setState({showModal: true, selectedItem: item})
@@ -50,7 +62,14 @@ showModal(item){
 onClose(){
   this.setState({showModal: false})
 }
-
+borrarTarjeta(id){
+   
+  let resultado= this.state.users.filter(info=> info.uuid !== id)
+  
+    this.setState({
+  cleanUsers: resultado
+    })
+    }
 
 renderItem= ({item})=>{
     return(
@@ -80,7 +99,7 @@ renderItem= ({item})=>{
            </Text>
            </View>
           
-           <Button  title= 'BORRAR TARJETA'></Button>
+           <Button  title= 'BORRAR TARJETA' onDelete={this.borrarTarjeta.bind(this)} id={item.uuid} ></Button>
              
                           </TouchableOpacity>   
                     
@@ -91,7 +110,11 @@ renderItem= ({item})=>{
     return (
     
         <View style={styles.view}>
-         
+            <View style={{left: 10, top:10, justifyContent: "center", alignSelf: "left", marginTop: 15, marginBottom: 6}}>
+      <TouchableOpacity onPress={()=> this.props.navigation.openDrawer()}>
+      <Image source={require('./menuicon.png')} style={{height: 30, width:30, justifyContent:"center", alignSelf: "center"}}/>
+      </TouchableOpacity>
+      </View> 
        <FlatList
         data={this.state.importedUsers}
         keyExtractor= {(item, idx)=> idx.toString()}

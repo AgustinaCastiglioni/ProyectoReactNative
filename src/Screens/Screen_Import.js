@@ -7,7 +7,9 @@ Button,
 StyleSheet,
 FlatList,
 ActivityIndicator,
-Image
+Image,
+TextInput,
+SafeAreaView
 
 } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -23,28 +25,34 @@ export default class Screen_Import extends Component {
         users: [],
         activity: true,
         showModal: false,
-        selectedItem: null
+        selectedItem: null,
+        contactosAGuardar:[],
+        numeroTarjetasImportadas: '',
+      
     }
 }
 
 componentDidMount(){
 
-    fetch('https://randomuser.me/api/?results=10')
+    fetch('https://randomuser.me/api/?results=' + this.state.numeroTarjetasImportadas)
     .then(response=> response.json())
     .then((result)=>{
       this.setState({users: result.results, activity: false})
-
-      console.log(users)
     })
 
     } 
-   
+   importarDatos(){
+    fetch('https://randomuser.me/api/?results=' + this.state.numeroTarjetasImportadas)
+    .then(response=> response.json())
+    .then((result)=>{
+      this.setState({users: result.results, activity: false})
+    })
 
-   
-  
+   }
+
     async storeData(){
       try{
-  const jsonStringify= JSON.stringify(this.state.users)
+  const jsonStringify= JSON.stringify(this.state.contactosAGuardar)
   await AsyncStorage.setItem('Users', jsonStringify);
   console.log(jsonStringify)
       }
@@ -52,12 +60,20 @@ componentDidMount(){
   console.log(e)
       }
     }
+  
+
     showModal(item){
       this.setState({showModal: true, selectedItem: item})
     }
     onClose(){
       this.setState({showModal: false})
     }
+
+usuarioAGuardar(item){
+this.state.contactosAGuardar.push(item)
+ this.setState({contactosAGuardar: this.state.contactosAGuardar})
+ console.log(this.state.contactosAGuardar)
+}
 
     renderItem= ({item})=>{
       return(
@@ -86,16 +102,30 @@ componentDidMount(){
              Fecha de Nacimiento: {item.dob.date}
              </Text>
              </View>
+            <Button  title= 'Seleccionar Contacto' onPress={()=> this.usuarioAGuardar(item)}></Button>
                             </TouchableOpacity>   
                       
       )
   }
 
   render(){
-     
+   
     return (
-    
-     
+    <View style={{flex:1}}>
+       <View style={{left: 10, top:10, justifyContent: "center", alignSelf: "left", marginTop: 15, marginBottom: 6}}>
+      <TouchableOpacity onPress={()=> this.props.navigation.openDrawer()}>
+      <Image source={require('./menuicon.png')} style={{height: 30, width:30, justifyContent:"center", alignSelf: "center"}}/>
+      </TouchableOpacity>
+      </View> 
+      <SafeAreaView>
+      <TextInput
+        style={styles.input}
+        placeholder="Ingresa numero de tarjetas a importar"
+        onChangeText={ (text)=> this.setState({numeroTarjetasImportadas: text})}
+        keyboardType="numeric"
+      />
+      <Button onPress={()=> this.importarDatos()} title="IMPORTAR"></Button>
+      </SafeAreaView>
       <View style={styles.view}>
       { this.state.activity 
       ? <><Text>Buscando contactos...</Text>
@@ -113,7 +143,7 @@ componentDidMount(){
    <Button title="GUARDAR CONTACTOS" onPress={()=> this.storeData()}/>
    <ModalCards showModal={this.state.showModal} onClose={()=> this.onClose()} value={this.state.selectedItem}/>
     </View>
-    
+    </View>
     );
   }
   
@@ -153,6 +183,12 @@ componentDidMount(){
     cardText:{
       fontSize: 20,
       fontWeight: '300'
+    },
+    input: {
+      height: 40,
+      margin: 12,
+      borderWidth: 1,
     }
     
     })
+   
