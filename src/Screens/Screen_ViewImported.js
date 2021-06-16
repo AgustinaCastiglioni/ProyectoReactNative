@@ -73,14 +73,7 @@ showModal(item){
 onClose(){
   this.setState({showModal: false})
 }
-borrarTarjeta(id){
-   
-  let resultado= this.state.users.filter(info=> info.uuid !== id)
-  
-    this.setState({
-  cleanUsers: resultado
-    })
-    }
+
   usuarioAPapelera(item){
       this.state.contactosPapelera.push(item)
        this.setState({contactosAPapelera: this.state.contactosPapelera})
@@ -116,7 +109,7 @@ renderItem= ({item})=>{
            </View>
           
            <Button  title= 'BORRAR TARJETA'  onPress={()=> this.usuarioAPapelera(item)}  ></Button>
-           <Button  title= 'Reciclar'   onPress={()=> this.storeData(item)} ></Button>
+           
            
              
                           </TouchableOpacity>   
@@ -140,9 +133,11 @@ renderItem= ({item})=>{
         /> 
             
        <Button title="Obtener Contactos" onPress={()=> this.getData()}/>
+       <Button  title= 'Papelera'   onPress={()=> this.storeData(item)} ></Button>
        <ModalCards showModal={this.state.showModal} onClose={()=> this.onClose()} value={this.state.selectedItem}/>
         </View>
         
+      
     
     );
   }

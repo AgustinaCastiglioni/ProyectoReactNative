@@ -68,6 +68,14 @@ componentDidMount(){
     onClose(){
       this.setState({showModal: false})
     }
+    borrarTarjeta(id){
+   
+      let resultado= this.state.users.filter(info=> info.uuid !== id)
+      
+        this.setState({
+      cleanUsers: resultado
+        })
+        }
 
 usuarioAGuardar(item){
 this.state.contactosAGuardar.push(item)
@@ -138,6 +146,7 @@ this.state.contactosAGuardar.push(item)
     data={this.state.users}
     keyExtractor= {(item, idx)=> idx.toString()}
     renderItem={this.renderItem}
+    onDelete={this.borrarTarjeta.bind(this)}
     /> 
   }       
    <Button title="GUARDAR CONTACTOS" onPress={()=> this.storeData()}/>

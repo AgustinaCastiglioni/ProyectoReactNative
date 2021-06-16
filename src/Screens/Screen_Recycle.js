@@ -24,7 +24,9 @@ export default class Screen_Recycle extends Component {
     super(props);
     this.state={
       importedUsersPapelera:[],
+      showModal: false, 
     }
+    
   }
   async getData(){
     try{
@@ -38,6 +40,9 @@ console.log(this.state.importedUsersPapelera)
 }
 onClose(){
   this.setState({showModal: false})
+}
+showModal(item){
+  this.setState({showModal: true, selectedItem: item})
 }
 renderItem= ({item})=>{
   return(
