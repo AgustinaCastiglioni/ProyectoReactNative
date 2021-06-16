@@ -27,12 +27,23 @@ export default class AcercaDe extends Component {
      display: 'none',
      showModal: false,
      selectedItem: null,
-     cleanUsers:[]
+     cleanUsers:[],
+     contactosPapelera:[]
 
     }
   }
 componentDidUpdate(){
  
+}
+async storeData(){
+  try{
+const jsonStringify= JSON.stringify(this.state.contactosPapelera)
+await AsyncStorage.setItem('Users Papelera', jsonStringify);
+console.log(jsonStringify)
+  }
+  catch(e){
+console.log(e)
+  }
 }
 async getData(){
     try{
@@ -70,6 +81,11 @@ borrarTarjeta(id){
   cleanUsers: resultado
     })
     }
+  usuarioAPapelera(item){
+      this.state.contactosPapelera.push(item)
+       this.setState({contactosAPapelera: this.state.contactosPapelera})
+       console.log(this.state.contactosPapelera)
+      }
 
 renderItem= ({item})=>{
     return(
@@ -99,7 +115,9 @@ renderItem= ({item})=>{
            </Text>
            </View>
           
-           <Button  title= 'BORRAR TARJETA' onDelete={this.borrarTarjeta.bind(this)} id={item.uuid} ></Button>
+           <Button  title= 'BORRAR TARJETA'  onPress={()=> this.usuarioAPapelera(item)}  ></Button>
+           <Button  title= 'Reciclar'   onPress={()=> this.storeData(item)} ></Button>
+           
              
                           </TouchableOpacity>   
                     

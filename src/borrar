@@ -1,0 +1,15 @@
+{
+        //La info del estado es la que se modifica, poreso uso this.state.infoJson
+        this.state.infoJson.map((tarjetas, idx)=>{
+          return <Tarjeta 
+          
+          onDelete={this.borrarTarjeta.bind(this)} key={tarjetas.id} infoTarjetas={tarjetas} name={tarjetas.name.first} id={tarjetas.id} colorFondo='white'
+                 />
+        
+        })
+      }
+
+
+      <button
+                onClick= {this.props.onDelete.bind(this, this.props.id)}
+                >BORRAR</button>
