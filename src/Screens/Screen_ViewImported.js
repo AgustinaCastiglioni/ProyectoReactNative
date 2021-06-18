@@ -39,7 +39,7 @@ async storeData(){
   try{
 const jsonStringify= JSON.stringify(this.state.contactosPapelera)
 await AsyncStorage.setItem('Users Papelera', jsonStringify);
-console.log(jsonStringify)
+
   }
   catch(e){
 console.log(e)
@@ -49,7 +49,7 @@ async getData(){
     try{
 const resultado= await AsyncStorage.getItem('Users')
 this.setState({importedUsers: JSON.parse(resultado), activity: false})
-console.log(this.state.importedUsers)
+
     }
     catch(e){
         console.log(e)
@@ -66,7 +66,14 @@ console.log(this.state.importedUsers)
 //componentWillUnmount(){
   //this.unsuscribe()
 //}
-
+borrarTarjeta(id){
+   
+  let resultado= this.state.infoJson.filter(info=> info.id !== id)
+  
+    this.setState({
+  infoJson: resultado
+    })
+    }
 showModal(item){
   this.setState({showModal: true, selectedItem: item})
 }
@@ -77,7 +84,11 @@ onClose(){
   usuarioAPapelera(item){
       this.state.contactosPapelera.push(item)
        this.setState({contactosAPapelera: this.state.contactosPapelera})
-       console.log(this.state.contactosPapelera)
+       
+
+       let resultado= this.state.importedUsers.filter(info=> info.login.uuid !== item.login.uuid)
+     this.setState({importedUsers: resultado})
+     console.log(resultado.length)
       }
 
 renderItem= ({item})=>{
@@ -108,7 +119,7 @@ renderItem= ({item})=>{
            </Text>
            </View>
           
-           <Button  title= 'BORRAR TARJETA'  onPress={()=> this.usuarioAPapelera(item)}  ></Button>
+           <Button  title= 'BORRAR TARJETA'  onPress={()=> this.usuarioAPapelera(item)}   ></Button>
            
            
              
