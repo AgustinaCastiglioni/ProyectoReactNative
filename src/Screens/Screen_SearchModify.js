@@ -26,7 +26,8 @@ export default class Screen_SearchModify extends Component {
       filtroBuscarApellido: "",
       filtroBuscarPais: "",
       filtroBuscarCiudad: "",
-      importedUsers: []
+      importedUsers: [], 
+      tarjetaDescripcion: '',
 
     }
   }
@@ -116,7 +117,11 @@ onClose(){
       }
     
         }
-
+agregarComentario(item){
+  
+  item.comentario = this.state.tarjetaDescripcion
+  console.log(item)
+}
    
   renderItem= ({item})=>{
     return(
