@@ -35,6 +35,7 @@ export default class ModalCards extends Component {
       </>
   }
       <Text style={styles.modalClose} onPress={this.props.onClose.bind(this)}> X </Text>
+    
                   </View>  
                   </View>
     </Modal>

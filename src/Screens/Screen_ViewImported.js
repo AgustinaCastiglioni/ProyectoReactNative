@@ -27,7 +27,6 @@ export default class AcercaDe extends Component {
      display: 'none',
      showModal: false,
      selectedItem: null,
-     cleanUsers:[],
      contactosPapelera:[]
 
     }
@@ -66,14 +65,8 @@ this.setState({importedUsers: JSON.parse(resultado), activity: false})
 //componentWillUnmount(){
   //this.unsuscribe()
 //}
-borrarTarjeta(id){
-   
-  let resultado= this.state.infoJson.filter(info=> info.id !== id)
-  
-    this.setState({
-  infoJson: resultado
-    })
-    }
+
+
 showModal(item){
   this.setState({showModal: true, selectedItem: item})
 }
@@ -144,7 +137,7 @@ renderItem= ({item})=>{
         /> 
             
        <Button title="Obtener Contactos" onPress={()=> this.getData()}/>
-       <Button  title= 'Papelera'   onPress={()=> this.storeData()} ></Button>
+       <Button  title= 'Papelera'   onPress={()=> this.storeData(item)} ></Button>
        <ModalCards showModal={this.state.showModal} onClose={()=> this.onClose()} value={this.state.selectedItem}/>
         </View>
         

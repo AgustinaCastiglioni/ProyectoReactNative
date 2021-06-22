@@ -27,7 +27,8 @@ export default class Screen_SearchModify extends Component {
       filtroBuscarPais: "",
       filtroBuscarCiudad: "",
       importedUsers: [], 
-      tarjetaDescripcion: '',
+      nuevoComentario: '',
+      nuevoPerfil: []
 
     }
   }
@@ -42,6 +43,17 @@ console.log(this.state.importedUsers)
         console.log(e)
     }
 }
+
+//async storeData(){
+  //try{
+//const comentarioAgregado= JSON.stringify(this.state.nuevoComentario)
+//await AsyncStorage.mergeItem('Users', comentarioAgregado);
+//console.log(comentarioAgregado)
+  //}
+  //catch(e){
+//console.log(e)
+ // }
+//}
 
 showModal(item){
   this.setState({showModal: true, selectedItem: item})
@@ -117,11 +129,16 @@ onClose(){
       }
     
         }
-agregarComentario(item){
-  
-  item.comentario = this.state.tarjetaDescripcion
-  console.log(item)
-}
+async agregarComentario(item){
+  try{
+  item.comentario = this.state.nuevoComentario
+const jsonValue=JSON.stringify(this.state.importedUsers)
+await AsyncStorage.setItem('Users', jsonValue)
+console.log(item.comentario)
+  }
+  catch(error){
+  console.log(error)
+}}
    
   renderItem= ({item})=>{
     return(
@@ -151,15 +168,15 @@ agregarComentario(item){
            </Text>
            <Text 
             style={styles.cardText}> 
-           Comentario: {item.dob.date}
+           Comentario: {item.comentario}
            </Text>
            <TextInput
             style={styles.input}
             placeholder="AGREGAR COMENTARIO"
-            onChangeText={ (text)=> this.setState({filtroBuscarCiudad: text})}
+            onChangeText={ (text)=> this.setState({nuevoComentario: text})}
             keyboardType="string"
           />
-          <Button title="AGREGAR" onPress> </Button>
+          <Button title="AGREGAR" onPress={()=> this.agregarComentario(item)}> </Button>
            </View>
           
            
@@ -181,7 +198,7 @@ agregarComentario(item){
      </TouchableOpacity>
      </View> 
      <SafeAreaView>
-     <Button title="OBTENER CONTACTOS" onPress={()=> this.getData()}/>
+     <Button style={{fontSize: 10}} title="OBTENER CONTACTOS" onPress={()=> this.getData()}/>
 
      <TextInput
        style={styles.input}
@@ -266,8 +283,8 @@ agregarComentario(item){
      fontWeight: '300'
    },
    input: {
-     height: 40,
-     margin: 12,
+     height: 20,
+     margin: 1,
      borderWidth: 1,
    }
    
