@@ -144,9 +144,20 @@ onClose(){
             style={styles.cardText}> 
            Fecha de Nacimiento: {item.dob.date}
            </Text>
+           <Text 
+            style={styles.cardText}> 
+           Comentario: {item.dob.date}
+           </Text>
+           <TextInput
+            style={styles.input}
+            placeholder="AGREGAR COMENTARIO"
+            onChangeText={ (text)=> this.setState({filtroBuscarCiudad: text})}
+            keyboardType="string"
+          />
+          <Button title="AGREGAR" onPress> </Button>
            </View>
           
-           <Button  title= 'BORRAR TARJETA'  onPress={()=> this.usuarioAPapelera(item)}  ></Button>
+           
            
            
              
@@ -194,6 +205,7 @@ onClose(){
        onChangeText={ (text)=> this.setState({filtroBuscarCiudad: text})}
        keyboardType="string"
      />
+     
      <Button onPress={()=> this.filtrarCiudad()} title="BUSCAR CIUDAD"></Button>
 
     

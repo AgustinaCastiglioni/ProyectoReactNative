@@ -144,7 +144,7 @@ renderItem= ({item})=>{
         /> 
             
        <Button title="Obtener Contactos" onPress={()=> this.getData()}/>
-       <Button  title= 'Papelera'   onPress={()=> this.storeData(item)} ></Button>
+       <Button  title= 'Papelera'   onPress={()=> this.storeData()} ></Button>
        <ModalCards showModal={this.state.showModal} onClose={()=> this.onClose()} value={this.state.selectedItem}/>
         </View>
         

@@ -68,13 +68,13 @@ componentDidMount(){
     onClose(){
       this.setState({showModal: false})
     }
-    borrarTarjeta(id){
+    borrarTarjeta(item){
    
-      let resultado= this.state.users.filter(info=> info.uuid !== id)
+      let resultado= this.state.users.filter((item) => {
+          return item.login.uuid !== value.login.uuid
+      })
       
-        this.setState({
-      cleanUsers: resultado
-        })
+        this.setState({users: resultado})
         }
 
 usuarioAGuardar(item){
