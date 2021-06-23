@@ -114,7 +114,7 @@ renderItem= ({item})=>{
            </Text>
            </View>
           
-           <Button  title= 'BORRAR TARJETA'  onPress={()=> this.usuarioAPapelera(item)}   ></Button>
+           <Button  title= 'BORRAR TARJETA'  onPress={()=> this.usuarioAPapelera(item)}></Button>
            
            
              
