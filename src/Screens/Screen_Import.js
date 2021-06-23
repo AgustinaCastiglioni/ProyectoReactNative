@@ -9,13 +9,15 @@ FlatList,
 ActivityIndicator,
 Image,
 TextInput,
-SafeAreaView
+SafeAreaView,
+Pressable,
+Animated
 
 } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { infoFetch } from '../Api/RandomUsers';
 import ModalCards from '../Components/ModalCards.js'
-
+import {styles} from '../Styles/Styles.js'
 
 
 export default class Screen_Import extends Component {
@@ -31,7 +33,7 @@ export default class Screen_Import extends Component {
       
     }
 }
-
+rotation= new Animated.Value(1)
 componentDidMount(){
 
     fetch('https://randomuser.me/api/?results=' + this.state.numeroTarjetasImportadas)
@@ -49,6 +51,15 @@ componentDidMount(){
     })
 
    }
+
+   //componentDidMount(){
+    //this.unsuscribe= this.props.navigation.addListener('focus', ()=>{
+      //this.importarDatos();
+     //})
+   //}
+   //componentWillUnmount(){
+     //this.unsuscribe()
+   //}
 
     async storeData(){
       try{
@@ -77,16 +88,33 @@ componentDidMount(){
         this.setState({users: resultado})
         }
 
-usuarioAGuardar(item){
-this.state.contactosAGuardar.push(item)
- this.setState({contactosAGuardar: this.state.contactosAGuardar})
- console.log(this.state.contactosAGuardar)
-}
 
+ topDown= (item)=>{
+   Animated.sequence([
+    Animated.spring(this.rotation,{
+      toValue: 15,
+      duration: 100,
+      useNativeDriver: false
+    }),
+    Animated.spring(this.rotation,{
+      toValue: 0,
+      duration: 100,
+      useNativeDriver: false
+    })
+
+   ]).start();
+ 
+  this.state.contactosAGuardar.push(item)
+ this.setState({contactosAGuardar: this.state.contactosAGuardar})
+}
     renderItem= ({item})=>{
       return(
          
           <TouchableOpacity style={styles.container} onPress={()=> this.showModal(item)}>
+             <Animated.View style={{
+              top: this.rotation,
+            }}
+            > 
           <Image style={styles.cardImage} source={{uri: item.picture.medium}}/>
           <View style={styles.containerText}>
              <Text 
@@ -110,29 +138,35 @@ this.state.contactosAGuardar.push(item)
              Fecha de Nacimiento: {item.dob.date}
              </Text>
              </View>
-            <Button  title= 'Seleccionar Contacto' onPress={()=> this.usuarioAGuardar(item)}></Button>
-                            </TouchableOpacity>   
+            <Button  title= 'Seleccionar Contacto' onPress={()=> this.topDown(item)}></Button>
+            </Animated.View>
+             </TouchableOpacity>   
                       
       )
   }
 
   render(){
-   
+  
+
     return (
-    <View style={{flex:1}}>
-       <View style={{left: 10, top:10, justifyContent: "center", alignSelf: "left", marginTop: 15, marginBottom: 6}}>
+     
+    <View style={styles.view}>
+       <View style={styles.viewMenuIcon}>
       <TouchableOpacity onPress={()=> this.props.navigation.openDrawer()}>
-      <Image source={require('./menuicon.png')} style={{height: 30, width:30, justifyContent:"center", alignSelf: "center"}}/>
+      <Image source={require('./whitemenu.png')} style={styles.imageIcon}/>
       </TouchableOpacity>
       </View> 
-      <SafeAreaView>
+      <SafeAreaView style={styles.safe}>
       <TextInput
         style={styles.input}
-        placeholder="Ingresa numero de tarjetas a importar"
+        placeholder="Ingresa número de tarjetas a importar"
         onChangeText={ (text)=> this.setState({numeroTarjetasImportadas: text})}
         keyboardType="numeric"
       />
-      <Button onPress={()=> this.importarDatos()} title="IMPORTAR"></Button>
+     
+      <Pressable style={styles.button} onPress={()=> this.importarDatos()}>
+       <Text style={styles.text}>IMPORTAR TARJETAS</Text>
+       </Pressable>
       </SafeAreaView>
       <View style={styles.view}>
       { this.state.activity 
@@ -149,7 +183,10 @@ this.state.contactosAGuardar.push(item)
     onDelete={this.borrarTarjeta.bind(this)}
     /> 
   }       
-   <Button title="GUARDAR CONTACTOS" onPress={()=> this.storeData()}/>
+  
+   <Pressable style={styles.button} onPress={()=> this.storeData()}>
+       <Text style={styles.text}>GUARDAR CONTACTOS</Text>
+       </Pressable>
    <ModalCards showModal={this.state.showModal} onClose={()=> this.onClose()} value={this.state.selectedItem}/>
     </View>
     </View>
@@ -157,47 +194,5 @@ this.state.contactosAGuardar.push(item)
   }
   
   }
-  const styles= StyleSheet.create({
-    view:{
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex:1
-    },
-    container:{
-     
-      borderColor: 'black', 
-      borderWidth: 6,
-      borderRadius:14, 
-      margin: 18,
-      shadowColor: '#000',
-      shadowOpacity: 0.1,
-      shadowRadius: 1,
-      shadowOffset: {
-        width: 3,
-        height:2
-      }
-    },
-    containerText:{
-      borderColor: 'grey', 
-      borderWidth: 2,
-      borderRadius: 6, 
-      margin: 8,
-      padding: 4,
-    },
-    cardImage:{
-      width: 150, 
-      height: 150, 
-      alignSelf: 'center'
-    },
-    cardText:{
-      fontSize: 20,
-      fontWeight: '300'
-    },
-    input: {
-      height: 40,
-      margin: 12,
-      borderWidth: 1,
-    }
-    
-    })
+
    

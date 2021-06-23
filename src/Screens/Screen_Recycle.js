@@ -11,10 +11,11 @@ StyleSheet,
 FlatList,
 ActivityIndicator,
 Alert,
+Pressable
 } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import ModalCards from '../Components/ModalCards.js'
-
+import {styles} from '../Styles/Styles.js'
 
 
 
@@ -25,6 +26,7 @@ export default class Screen_Recycle extends Component {
     this.state={
       importedUsersPapelera:[],
       showModal: false, 
+      
     }
     
   }
@@ -44,6 +46,7 @@ onClose(){
 showModal(item){
   this.setState({showModal: true, selectedItem: item})
 }
+
 renderItem= ({item})=>{
   return(
      
@@ -71,7 +74,7 @@ renderItem= ({item})=>{
          Fecha de Nacimiento: {item.dob.date}
          </Text>
          </View>
-         
+         <Button  title= 'RESTAURAR TARJETA' ></Button>
            
                         </TouchableOpacity>   
                   
@@ -82,9 +85,9 @@ renderItem= ({item})=>{
     return (
     
       <View style={styles.view}>
-      <View style={{left: 10, top:10, justifyContent: "center", alignSelf: "left", marginTop: 15, marginBottom: 6}}>
+      <View style={styles.viewMenuIcon}>
 <TouchableOpacity onPress={()=> this.props.navigation.openDrawer()}>
-<Image source={require('./menuicon.png')} style={{height: 30, width:30, justifyContent:"center", alignSelf: "center"}}/>
+<Image source={require('./whitemenu.png')} style={styles.imageIcon}/>
 </TouchableOpacity>
 </View> 
 <FlatList
@@ -93,7 +96,9 @@ renderItem= ({item})=>{
         renderItem={this.renderItem}
         /> 
 
- <Button title="Obtener Contactos Borrados" onPress={()=> this.getData()}/>
+<Pressable style={styles.button} onPress={()=> this.getData()}>
+       <Text style={styles.text}>OBTENER CONTACTOS BORRADOS</Text>
+       </Pressable>
  <ModalCards showModal={this.state.showModal} onClose={()=> this.onClose()} value={this.state.selectedItem}/>
   </View>
         
@@ -101,41 +106,3 @@ renderItem= ({item})=>{
     )
   }
 }
-const styles= StyleSheet.create({
-  view:{
-  justifyContent: 'center',
-  alignItems: 'center',
-  flex:1
-  },
-  container:{
-   
-    borderColor: 'black', 
-    borderWidth: 6,
-    borderRadius:14, 
-    margin: 18,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 1,
-    shadowOffset: {
-      width: 3,
-      height:2
-    }
-  },
-  containerText:{
-    borderColor: 'grey', 
-    borderWidth: 2,
-    borderRadius: 6, 
-    margin: 8,
-    padding: 4,
-  },
-  cardImage:{
-    width: 150, 
-    height: 150, 
-    alignSelf: 'center'
-  },
-  cardText:{
-    fontSize: 20,
-    fontWeight: '300'
-  }
-  
-  })

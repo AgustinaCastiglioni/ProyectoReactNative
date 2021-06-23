@@ -26,11 +26,11 @@ export default class ModalCards extends Component {
       { this.props.value &&
       <>
         <Text style={styles.modalText}>Calle y Número: {this.props.value.location.street.number}  {this.props.value.location.street.name}  </Text>
-        <Text style={styles.modalText}>Ciudad y Estado:  {this.props.value.location.city} 
+        <Text style={styles.modalText}>Ciudad y Estado: {this.props.value.location.city} 
                /{this.props.value.location.state} </Text>
        <Text style={styles.modalText}>País: {this.props.value.location.country} </Text>
         <Text style={styles.modalText}>Codigo Postal: {this.props.value.location.postcode} </Text>
-        <Text style={styles.modalText}>Registrado:{this.props.value.registered.date} </Text>
+        <Text style={styles.modalText}>Registrado: {this.props.value.registered.date} </Text>
       <Text style={styles.modalText}>Teléfono: {this.props.value.phone} </Text>
       </>
   }
@@ -49,14 +49,14 @@ modalContainer:{
 flex:1,
 justifyContent: 'flex-end',
 alignItems: 'center',
-//backgroundColor: 'rgba(0,0,0,0.3'
+backgroundColor: 'rgba(0,0,0,0.7)'
 },
 modal:{
 height: '70%',
 width: '100%',
-backgroundColor: 'white',
+backgroundColor: 'rgb(150,154,179)',
 justifyContent: 'center',
-alignItems:'center',
+alignItems:'flex-start',
 borderTopLeftRadius:20,
 borderTopRightRadius:20,
 shadowColor:'black',
@@ -69,12 +69,16 @@ shadowOffset:{
 },
 modalText:{
   fontSize: 20,
+  color: 'white',
+  fontWeight: '500'
 
 },
 modalClose:{
-fontSize: 21,
+fontSize: 25,
 position: 'absolute',
 right: 20,
 top: 10,
+fontWeight: '800',
+color: 'white'
 }
 })

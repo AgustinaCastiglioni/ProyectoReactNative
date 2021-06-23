@@ -8,12 +8,13 @@ SafeAreaView,
 TextInput,
 Image,
 Button,
+Pressable,
 FlatList,
 
 } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import ModalCards from '../Components/ModalCards.js'
-
+import {styles} from '../Styles/Styles.js'
 
 
 
@@ -44,16 +45,16 @@ console.log(this.state.importedUsers)
     }
 }
 
-//async storeData(){
-  //try{
-//const comentarioAgregado= JSON.stringify(this.state.nuevoComentario)
-//await AsyncStorage.mergeItem('Users', comentarioAgregado);
-//console.log(comentarioAgregado)
-  //}
-  //catch(e){
-//console.log(e)
- // }
-//}
+async storeData(){
+  try{
+const comentarioAgregado= JSON.stringify(this.state.nuevoComentario)
+await AsyncStorage.mergeItem('Users', comentarioAgregado);
+console.log(comentarioAgregado)
+  }
+  catch(e){
+console.log(e)
+  }
+}
 
 showModal(item){
   this.setState({showModal: true, selectedItem: item})
@@ -191,44 +192,57 @@ console.log(item.comentario)
    
     return (
     
-      <View style={{flex:1}}>
-      <View style={{left: 10, top:10, justifyContent: "center", alignSelf: "left", marginTop: 15, marginBottom: 6}}>
+      <View style={{flex:1, backgroundColor: 'rgb(47,48,77)'}}>
+      <View style={styles.viewMenuIcon}>
      <TouchableOpacity onPress={()=> this.props.navigation.openDrawer()}>
-     <Image source={require('./menuicon.png')} style={{height: 30, width:30, justifyContent:"center", alignSelf: "center"}}/>
+     <Image source={require('./whitemenu.png')} style={styles.imageIcon}/>
      </TouchableOpacity>
      </View> 
-     <SafeAreaView>
-     <Button style={{fontSize: 10}} title="OBTENER CONTACTOS" onPress={()=> this.getData()}/>
+     <SafeAreaView style={styles.safe}>
+     
+     <Pressable style={styles.button} onPress={()=> this.getData()}>
+       <Text style={styles.text}>OBTENER CONTACTOS</Text>
+       </Pressable>
 
      <TextInput
        style={styles.input}
        placeholder="FILTRAR NOMBRE"
        onChangeText={ (text)=> this.setState({filtroBuscarNombre: text})}
-       keyboardType="string"
+       keyboardType="default"
      />
-     <Button onPress={()=> this.filtrarNombre()} title="BUSCAR NOMBRE"></Button>
+     <Pressable style={styles.button} onPress={()=> this.filtrarNombre()}>
+       <Text style={styles.text}>BUSCAR NOMBRE</Text>
+       </Pressable>
+       
      <TextInput
        style={styles.input}
        placeholder="FILTRAR APELLIDO"
        onChangeText={ (text)=> this.setState({filtroBuscarApellido: text})}
-       keyboardType="string"
+       keyboardType="default"
      />
-     <Button onPress={()=> this.filtrarApellido()} title="BUSCAR APELLIDO"></Button>
+    <Pressable style={styles.button} onPress={()=> this.filtrarApellido()}>
+       <Text style={styles.text}>BUSCAR APELLIDO</Text>
+       </Pressable>
+
      <TextInput
        style={styles.input}
        placeholder="FILTRAR PAIS"
        onChangeText={ (text)=> this.setState({filtroBuscarPais: text})}
-       keyboardType="string"
+       keyboardType="default"
      />
-     <Button onPress={()=> this.filtrarPais()} title="BUSCAR PAIS"></Button>
+    <Pressable style={styles.button} onPress={()=> this.filtrarPais()}>
+       <Text style={styles.text}>BUSCAR PAÍS</Text>
+       </Pressable>
      <TextInput
        style={styles.input}
        placeholder="FILTRAR CIUDAD"
        onChangeText={ (text)=> this.setState({filtroBuscarCiudad: text})}
-       keyboardType="string"
+       keyboardType="default"
      />
      
-     <Button onPress={()=> this.filtrarCiudad()} title="BUSCAR CIUDAD"></Button>
+     <Pressable style={styles.button} onPress={()=> this.filtrarCiudad()}>
+       <Text style={styles.text}>BUSCAR CIUDAD</Text>
+       </Pressable>
 
     
       <FlatList
@@ -246,50 +260,7 @@ console.log(item.comentario)
  }
  
  }
- const styles= StyleSheet.create({
-   view:{
-   justifyContent: 'center',
-   alignItems: 'center',
-   flex:1
-   },
-   container:{
-    
-     borderColor: 'black', 
-     borderWidth: 6,
-     borderRadius:14, 
-     margin: 18,
-     shadowColor: '#000',
-     shadowOpacity: 0.1,
-     shadowRadius: 1,
-     shadowOffset: {
-       width: 3,
-       height:2
-     }
-   },
-   containerText:{
-     borderColor: 'grey', 
-     borderWidth: 2,
-     borderRadius: 6, 
-     margin: 8,
-     padding: 4,
-   },
-   cardImage:{
-     width: 150, 
-     height: 150, 
-     alignSelf: 'center'
-   },
-   cardText:{
-     fontSize: 20,
-     fontWeight: '300'
-   },
-   input: {
-     height: 20,
-     margin: 1,
-     borderWidth: 1,
-   }
-   
-   })
-  
+ 
        
     
     

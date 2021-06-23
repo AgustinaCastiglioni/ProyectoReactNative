@@ -5,17 +5,16 @@ Text,
 TouchableOpacity, 
 Button,
 Image, 
-StyleSheet,
 FlatList,
 ActivityIndicator,
 Alert,
-
+Pressable
 
 
 } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import ModalCards from '../Components/ModalCards.js'
-
+import {styles} from '../Styles/Styles.js'
 
 
 export default class AcercaDe extends Component {
@@ -55,17 +54,6 @@ this.setState({importedUsers: JSON.parse(resultado), activity: false})
     }
 }
 
-//componentDidMount(){
- // this.unsuscribe= this.props.navigation.addListener('focus', ()=>{
-  //  this.getData();
-  //})
-
-//}
-
-//componentWillUnmount(){
-  //this.unsuscribe()
-//}
-
 
 showModal(item){
   this.setState({showModal: true, selectedItem: item})
@@ -76,9 +64,7 @@ onClose(){
 
   usuarioAPapelera(item){
       this.state.contactosPapelera.push(item)
-       this.setState({contactosAPapelera: this.state.contactosPapelera})
        
-
        let resultado= this.state.importedUsers.filter(info=> info.login.uuid !== item.login.uuid)
      this.setState({importedUsers: resultado})
      console.log(resultado.length)
@@ -125,9 +111,9 @@ renderItem= ({item})=>{
     return (
     
         <View style={styles.view}>
-            <View style={{left: 10, top:10, justifyContent: "center", alignSelf: "left", marginTop: 15, marginBottom: 6}}>
+       <View style={styles.viewMenuIcon}>
       <TouchableOpacity onPress={()=> this.props.navigation.openDrawer()}>
-      <Image source={require('./menuicon.png')} style={{height: 30, width:30, justifyContent:"center", alignSelf: "center"}}/>
+      <Image source={require('./whitemenu.png')} style={styles.imageIcon}/>
       </TouchableOpacity>
       </View> 
        <FlatList
@@ -136,8 +122,16 @@ renderItem= ({item})=>{
         renderItem={this.renderItem}
         /> 
             
-       <Button title="Obtener Contactos" onPress={()=> this.getData()}/>
-       <Button  title= 'Papelera'   onPress={()=> this.storeData(item)} ></Button>
+      
+
+       <Pressable style={styles.button} onPress={()=> this.getData()}>
+       <Text style={styles.text}>OBTENER CONTACTOS</Text>
+       </Pressable>
+       <Pressable style={styles.button}  onPress={()=> this.storeData()}>
+       <Text style={styles.text}>PAPELERA</Text>
+       </Pressable>
+
+      
        <ModalCards showModal={this.state.showModal} onClose={()=> this.onClose()} value={this.state.selectedItem}/>
         </View>
         
@@ -147,41 +141,3 @@ renderItem= ({item})=>{
   }
   
   }
-const styles= StyleSheet.create({
-view:{
-justifyContent: 'center',
-alignItems: 'center',
-flex:1
-},
-container:{
- 
-  borderColor: 'black', 
-  borderWidth: 6,
-  borderRadius:14, 
-  margin: 18,
-  shadowColor: '#000',
-  shadowOpacity: 0.1,
-  shadowRadius: 1,
-  shadowOffset: {
-    width: 3,
-    height:2
-  }
-},
-containerText:{
-  borderColor: 'grey', 
-  borderWidth: 2,
-  borderRadius: 6, 
-  margin: 8,
-  padding: 4,
-},
-cardImage:{
-  width: 150, 
-  height: 150, 
-  alignSelf: 'center'
-},
-cardText:{
-  fontSize: 20,
-  fontWeight: '300'
-}
-
-})
