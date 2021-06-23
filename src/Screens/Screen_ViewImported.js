@@ -62,6 +62,7 @@ onClose(){
   this.setState({showModal: false})
 }
 
+
   usuarioAPapelera(item){
       this.state.contactosPapelera.push(item)
        

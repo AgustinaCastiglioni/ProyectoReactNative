@@ -32,6 +32,7 @@ export default class ModalCards extends Component {
         <Text style={styles.modalText}>Codigo Postal: {this.props.value.location.postcode} </Text>
         <Text style={styles.modalText}>Registrado: {this.props.value.registered.date} </Text>
       <Text style={styles.modalText}>Teléfono: {this.props.value.phone} </Text>
+      <Text style={styles.modalText}>Comentario agregado: {this.props.value.comentario}</Text>
       </>
   }
       <Text style={styles.modalClose} onPress={this.props.onClose.bind(this)}> X </Text>

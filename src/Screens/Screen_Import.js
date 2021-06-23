@@ -52,14 +52,6 @@ componentDidMount(){
 
    }
 
-   //componentDidMount(){
-    //this.unsuscribe= this.props.navigation.addListener('focus', ()=>{
-      //this.importarDatos();
-     //})
-   //}
-   //componentWillUnmount(){
-     //this.unsuscribe()
-   //}
 
     async storeData(){
       try{

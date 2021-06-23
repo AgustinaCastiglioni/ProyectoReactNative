@@ -132,7 +132,11 @@ onClose(){
         }
 async agregarComentario(item){
   try{
-  item.comentario = this.state.nuevoComentario
+    this.state.importedUsers.map(user => {
+      if(user.login.uuid == item.login.uuid){
+          user.comentario = this.state.nuevoComentario
+      }
+  })
 const jsonValue=JSON.stringify(this.state.importedUsers)
 await AsyncStorage.setItem('Users', jsonValue)
 console.log(item.comentario)
@@ -167,22 +171,14 @@ console.log(item.comentario)
             style={styles.cardText}> 
            Fecha de Nacimiento: {item.dob.date}
            </Text>
-           <Text 
-            style={styles.cardText}> 
-           Comentario: {item.comentario}
-           </Text>
            <TextInput
             style={styles.input}
             placeholder="AGREGAR COMENTARIO"
             onChangeText={ (text)=> this.setState({nuevoComentario: text})}
-            keyboardType="string"
+            keyboardType="default"
           />
           <Button title="AGREGAR" onPress={()=> this.agregarComentario(item)}> </Button>
            </View>
-          
-           
-           
-           
              
                           </TouchableOpacity>   
                     

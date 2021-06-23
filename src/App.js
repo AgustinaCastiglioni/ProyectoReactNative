@@ -45,6 +45,7 @@ export default class App extends Component {
      <Drawer.Screen name="Ver Tarjetas Importadas" component={Screen_ViewImported}/>
      <Drawer.Screen name="Buscar y Editar Tarjetas" component={Screen_SearchModify}/>
      <Drawer.Screen name="Papelera de Reciclaje" component={Screen_Recycle}/>
+     <Drawer.Screen name="Acerca De" component={AcercaDe}/>
   </Drawer.Navigator>
 </NavigationContainer>
     
