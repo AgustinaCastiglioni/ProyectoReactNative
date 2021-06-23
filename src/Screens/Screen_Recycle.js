@@ -25,11 +25,27 @@ export default class Screen_Recycle extends Component {
     super(props);
     this.state={
       importedUsersPapelera:[],
+      contactosRestaurados:[],
       showModal: false, 
       
     }
     
   }
+
+  
+
+  async storeData(){
+    try{
+  const jsonStringify= JSON.stringify(this.state.contactosRestaurados)
+  await AsyncStorage.setItem('Users Restaurados', jsonStringify);
+  
+    }
+    catch(e){
+  console.log(e)
+    }
+  }
+
+
   async getData(){
     try{
 const resultado= await AsyncStorage.getItem('Users Papelera')
@@ -46,6 +62,14 @@ onClose(){
 showModal(item){
   this.setState({showModal: true, selectedItem: item})
 }
+
+usuarioARestaurar(item){
+  this.state.contactosRestaurados.push(item)
+   
+   let resultado= this.state.importedUsersPapelera.filter(info=> info.login.uuid !== item.login.uuid)
+   this.setState({importedUsersPapelera: resultado})
+ 
+  }
 
 renderItem= ({item})=>{
   return(
@@ -74,7 +98,7 @@ renderItem= ({item})=>{
          Fecha de Nacimiento: {item.dob.date}
          </Text>
          </View>
-         <Button  title= 'RESTAURAR TARJETA' ></Button>
+         <Button  title= 'RESTAURAR TARJETA' onPress={()=> this.usuarioARestaurar(item)}></Button>
            
                         </TouchableOpacity>   
                   
@@ -96,9 +120,15 @@ renderItem= ({item})=>{
         renderItem={this.renderItem}
         /> 
 
-<Pressable style={styles.button} onPress={()=> this.getData()}>
-       <Text style={styles.text}>OBTENER CONTACTOS BORRADOS</Text>
-       </Pressable>
+        
+      <Pressable style={styles.button} onPress={()=> this.getData()}>
+      <Text style={styles.text}>OBTENER CONTACTOS BORRADOS</Text>
+      </Pressable>
+
+      <Pressable style={styles.button} onPress={()=> this.storeData()}>
+      <Text style={styles.text}>RESTAURAR CONTACTO</Text>
+      </Pressable>
+
  <ModalCards showModal={this.state.showModal} onClose={()=> this.onClose()} value={this.state.selectedItem}/>
   </View>
         

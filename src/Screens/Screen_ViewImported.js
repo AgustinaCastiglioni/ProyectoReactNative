@@ -26,6 +26,7 @@ export default class AcercaDe extends Component {
      display: 'none',
      showModal: false,
      selectedItem: null,
+     importedUsersRestaurados:[],
      contactosPapelera:[]
 
     }
@@ -33,6 +34,8 @@ export default class AcercaDe extends Component {
 componentDidUpdate(){
  
 }
+
+
 async storeData(){
   try{
 const jsonStringify= JSON.stringify(this.state.contactosPapelera)
@@ -43,6 +46,8 @@ await AsyncStorage.setItem('Users Papelera', jsonStringify);
 console.log(e)
   }
 }
+
+
 async getData(){
     try{
 const resultado= await AsyncStorage.getItem('Users')
@@ -62,8 +67,18 @@ onClose(){
   this.setState({showModal: false})
 }
 
+async getDataRestaurados(){
+  try{
+const resultado= await AsyncStorage.getItem('Users Restaurados')
+this.setState({importedUsersRestaurados: JSON.parse(resultado)})
+console.log(this.state.importedUsersRestaurados)
+  }
+  catch(e){
+      console.log(e)
+  }
+}
 
-  usuarioAPapelera(item){
+usuarioAPapelera(item){
       this.state.contactosPapelera.push(item)
        
        let resultado= this.state.importedUsers.filter(info=> info.login.uuid !== item.login.uuid)
@@ -128,10 +143,14 @@ renderItem= ({item})=>{
        <Pressable style={styles.button} onPress={()=> this.getData()}>
        <Text style={styles.text}>OBTENER CONTACTOS</Text>
        </Pressable>
+
        <Pressable style={styles.button}  onPress={()=> this.storeData()}>
        <Text style={styles.text}>PAPELERA</Text>
        </Pressable>
 
+       <Pressable style={styles.button}  onPress={()=> this.getDataRestaurados()}>
+       <Text style={styles.text}>CONTACTOS RESTAURADOS</Text>
+       </Pressable>
       
        <ModalCards showModal={this.state.showModal} onClose={()=> this.onClose()} value={this.state.selectedItem}/>
         </View>

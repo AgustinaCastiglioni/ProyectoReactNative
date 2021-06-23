@@ -66,19 +66,30 @@ const styles= StyleSheet.create({
     },
     text: {
       fontSize: 16,
-      lineHeight: 21,
+      lineHeight: 15,
+      
+      letterSpacing: 0.25,
+      color: 'white',
+      
+      
+    },
+    textObtener: {
+      fontSize: 16,
+      lineHeight: 15,
       fontWeight: 'bold',
       letterSpacing: 0.25,
       color: 'white',
       
+      
     },
     input: {
-      height: 20,
+      height: 18,
       borderWidth: 1,
       backgroundColor: 'white',
       marginHorizontal: 25,
       borderRadius: 5,
-      padding: 12, 
+      padding: 10, 
+      marginTop: 8,
      
       
     },

@@ -196,10 +196,7 @@ console.log(item.comentario)
      </View> 
      <SafeAreaView style={styles.safe}>
      
-     <Pressable style={styles.button} onPress={()=> this.getData()}>
-       <Text style={styles.text}>OBTENER CONTACTOS</Text>
-       </Pressable>
-
+     
      <TextInput
        style={styles.input}
        placeholder="FILTRAR NOMBRE"
@@ -238,6 +235,10 @@ console.log(item.comentario)
      
      <Pressable style={styles.button} onPress={()=> this.filtrarCiudad()}>
        <Text style={styles.text}>BUSCAR CIUDAD</Text>
+       </Pressable>
+       
+       <Pressable style={styles.button} onPress={()=> this.getData()}>
+       <Text style={styles.textObtener}>OBTENER CONTACTOS</Text>
        </Pressable>
 
     
