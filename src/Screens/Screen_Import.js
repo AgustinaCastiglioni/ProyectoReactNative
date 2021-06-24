@@ -11,7 +11,8 @@ Image,
 TextInput,
 SafeAreaView,
 Pressable,
-Animated
+Animated,
+Alert
 
 } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -57,7 +58,7 @@ componentDidMount(){
       try{
   const jsonStringify= JSON.stringify(this.state.contactosAGuardar)
   await AsyncStorage.setItem('Users', jsonStringify);
-  console.log(jsonStringify)
+  Alert.alert("Se han guardado los contactos")
       }
       catch(e){
   console.log(e)
@@ -174,7 +175,7 @@ componentDidMount(){
     keyExtractor= {(item, idx)=> idx.toString()}
     renderItem={this.renderItem}
     onDelete={this.borrarTarjeta.bind(this)}
-   
+  
     /> 
   }       
   

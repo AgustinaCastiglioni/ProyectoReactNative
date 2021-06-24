@@ -40,7 +40,7 @@ async storeData(){
   try{
 const jsonStringify= JSON.stringify(this.state.contactosPapelera)
 await AsyncStorage.setItem('Users Papelera', jsonStringify);
-
+Alert.alert("El contacto se ha enviado a papelera")
   }
   catch(e){
 console.log(e)
@@ -76,6 +76,7 @@ usuarioAPapelera(item){
      this.setState({importedUsers: resultado})
      console.log(resultado.length)
       }
+
 
 renderItem= ({item})=>{
     return(

@@ -41,7 +41,7 @@ export default class Screen_Recycle extends Component {
       
   const jsonStringify= JSON.stringify([...this.state.contactosRestaurados, ...storage])
   await AsyncStorage.setItem('Users', jsonStringify);
-  
+ Alert.alert("El contacto se ha restaurado")
     }
     catch(e){
   console.log(e)

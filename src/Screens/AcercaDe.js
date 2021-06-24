@@ -48,7 +48,7 @@ export default class AcercaDe extends Component {
              Nicolas Yahni
              </Text>
              <Text style={{color: 'white', fontWeight: '500', fontSize: 35}}>
-             Federico D'Avola
+             Federico Davola
              </Text>
            
              </View>
