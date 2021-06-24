@@ -67,16 +67,7 @@ onClose(){
   this.setState({showModal: false})
 }
 
-async getDataRestaurados(){
-  try{
-const resultado= await AsyncStorage.getItem('Users Restaurados')
-this.setState({importedUsersRestaurados: JSON.parse(resultado)})
-console.log(this.state.importedUsersRestaurados)
-  }
-  catch(e){
-      console.log(e)
-  }
-}
+
 
 usuarioAPapelera(item){
       this.state.contactosPapelera.push(item)
@@ -148,9 +139,7 @@ renderItem= ({item})=>{
        <Text style={styles.text}>PAPELERA</Text>
        </Pressable>
 
-       <Pressable style={styles.button}  onPress={()=> this.getDataRestaurados()}>
-       <Text style={styles.text}>CONTACTOS RESTAURADOS</Text>
-       </Pressable>
+      
       
        <ModalCards showModal={this.state.showModal} onClose={()=> this.onClose()} value={this.state.selectedItem}/>
         </View>

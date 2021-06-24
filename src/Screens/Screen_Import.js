@@ -79,14 +79,7 @@ componentDidMount(){
       
         this.setState({users: resultado})
         }
-    // restaurarTarjeta(item){
    
-    //   let resultado= this.state.users.filter((item) => {
-    //       return item.login.uuid === value.login.uuid
-    //   })
-      
-    //     this.setState({users: resultado})
-    //     }
 
 
  topDown= (item)=>{
@@ -181,7 +174,7 @@ componentDidMount(){
     keyExtractor= {(item, idx)=> idx.toString()}
     renderItem={this.renderItem}
     onDelete={this.borrarTarjeta.bind(this)}
-   // onPress={this.restaurarTarjeta.bind(this)}
+   
     /> 
   }       
   

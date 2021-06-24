@@ -36,8 +36,11 @@ export default class Screen_Recycle extends Component {
 
   async storeData(){
     try{
-  const jsonStringify= JSON.stringify(this.state.contactosRestaurados)
-  await AsyncStorage.setItem('Users Restaurados', jsonStringify);
+      let storage = await AsyncStorage.getItem('Users')
+      storage = JSON.parse(storage)
+      
+  const jsonStringify= JSON.stringify([...this.state.contactosRestaurados, ...storage])
+  await AsyncStorage.setItem('Users', jsonStringify);
   
     }
     catch(e){
