@@ -83,12 +83,12 @@ const styles= StyleSheet.create({
       
     },
     input: {
-      height: 18,
+      height: 22,
       borderWidth: 1,
       backgroundColor: 'white',
       marginHorizontal: 25,
       borderRadius: 5,
-      padding: 10, 
+      padding: 1, 
       marginTop: 8,
      
       
