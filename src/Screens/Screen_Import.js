@@ -43,14 +43,14 @@ componentDidMount(){
       this.setState({users: result.results, activity: false})
     })
 
-    } 
+    }
+
    importarDatos(){
     fetch('https://randomuser.me/api/?results=' + this.state.numeroTarjetasImportadas)
     .then(response=> response.json())
     .then((result)=>{
       this.setState({users: result.results, activity: false})
     })
-
    }
 
 
@@ -72,14 +72,6 @@ componentDidMount(){
     onClose(){
       this.setState({showModal: false})
     }
-    borrarTarjeta(item){
-   
-      let resultado= this.state.users.filter((item) => {
-          return item.login.uuid !== value.login.uuid
-      })
-      
-        this.setState({users: resultado})
-        }
    
 
 
@@ -174,7 +166,7 @@ componentDidMount(){
     data={this.state.users}
     keyExtractor= {(item, idx)=> idx.toString()}
     renderItem={this.renderItem}
-    onDelete={this.borrarTarjeta.bind(this)}
+    
   
     /> 
   }       
