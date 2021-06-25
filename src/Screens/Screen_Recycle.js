@@ -53,7 +53,7 @@ export default class Screen_Recycle extends Component {
     try{
 const resultado= await AsyncStorage.getItem('Users Papelera')
 this.setState({importedUsersPapelera: JSON.parse(resultado)})
-console.log(this.state.importedUsersPapelera)
+
     }
     catch(e){
         console.log(e)

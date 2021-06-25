@@ -72,10 +72,11 @@ onClose(){
 usuarioAPapelera(item){
       this.state.contactosPapelera.push(item)
        
-       let resultado= this.state.importedUsers.filter(info=> info.login.uuid !== item.login.uuid)
+    let resultado= this.state.importedUsers.filter(info=> info.login.uuid !== item.login.uuid)
      this.setState({importedUsers: resultado})
-     console.log(resultado.length)
+ 
       }
+
 
 
 renderItem= ({item})=>{

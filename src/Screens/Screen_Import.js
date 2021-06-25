@@ -37,11 +37,7 @@ export default class Screen_Import extends Component {
 rotation= new Animated.Value(1)
 componentDidMount(){
 
-    fetch('https://randomuser.me/api/?results=' + this.state.numeroTarjetasImportadas)
-    .then(response=> response.json())
-    .then((result)=>{
-      this.setState({users: result.results, activity: false})
-    })
+   this.importarDatos();
 
     }
 
