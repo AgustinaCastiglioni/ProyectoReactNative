@@ -246,7 +246,7 @@ componentDidMount(){
         {/* TEXT
         React Native no puede mostrar texto sin el componente Text vs React/ HTML que no hace falta un tag */}
         {/*Propiedades de Text: 
-        disabled(se usa para diabilitar otras de las propiedades),
+        disabled(se usa para disabilitar otras de las propiedades),
         onPress, onLongPress(mantener selecionado),
         selectable(permite seleccionar text),
         permite acciones sobre texto y la seleccion de codigo */}
@@ -261,8 +261,18 @@ componentDidMount(){
       size={60}
       />
     </>
+    /* Flatlist
+        El Flatlist reemplaza el ScrollView, es para visualizar un listado de items
+        propiedades:
+        data(el arreglo con los items a visualizar)! props obligatorias
+        keyExtractor(permite generar la clave unica para cada item a visualizar)opcional
+        renderItem(como se visualiza el item) !props obligatorias
+        itemSeperatorComponent(solo se usa si es necesario para separar)opcional
+        numColumns(cantidad de columnas por defecto 1)opcional
+    */
    : <FlatList
     data={this.state.users}
+    //el extractor recibe como parametros el propio item que se procesa y el id(idx) despues se utiliza el id para pasarlo a string porque elkey requiere una cadena de caracteres.
     keyExtractor= {(item, idx)=> idx.toString()}
     renderItem={this.renderItem}
     
