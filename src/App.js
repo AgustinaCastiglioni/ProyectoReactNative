@@ -4,6 +4,7 @@ import{
  
 
 } from 'react-native'
+// estan todas las screen(components) importadas
 import Screen_Import from "./Screens/Screen_Import"
 import Screen_ViewImported from './Screens/Screen_ViewImported'
 import Screen_SearchModify from './Screens/Screen_SearchModify'

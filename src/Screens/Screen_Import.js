@@ -15,6 +15,7 @@ Animated,
 Alert
 
 } from 'react-native'
+//import del asyncstorage
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { infoFetch } from '../Api/RandomUsers';
 import ModalCards from '../Components/ModalCards.js'
@@ -35,6 +36,7 @@ export default class Screen_Import extends Component {
     }
 }
 rotation= new Animated.Value(1)
+
 componentDidMount(){
 
    this.importarDatos();
@@ -49,10 +51,32 @@ componentDidMount(){
     })
    }
 
+    /* Almacenamiento local 
+    diferente a paginas web, en apps de moviles se puede almacenar localmente.
+    AsyncStorage(para utilizar asyncstorage se tiene que saber que son arreglos(llamados arrays) y objetos json(ej: estado))
+    se tiene que instalar y tambien importar
+    almacena strings, cadena de strings -->
+    async --> para declarar que un metodo es asincronico, al tener async se usa try y catch
+    try y catch --> intenta resolver lo que aparece dentro del try y al no poder, el catch agarra el error para poder guardarlo, imprimirlo, no hacer nada etc
+    al tener estos metodos no hace falta usar tantos .then, 
+    porque? 
+    ej: setItem se usa en el try y devuelve la promesa el AWAIT permite esperar para que se resuelva
+
+    en la linea de codigo con el await:
+     1.se hace referencia al AsyncStorage importado
+     2.setItem pasa dos parametros, clave(referencia de informacion: 'Users') y valor
+
+     el catch agarra el error
+     se usa el async storeData para poder guardar tarjetas que se trajeron con el fetch
+     de esta manera se puede ver las tarjetas importadas en otro screen
+     ej: se usa el store Data de abajo en Screen_ViewImported con la funcion getData
+    */
 
     async storeData(){
       try{
+        //se crea una variable en este caso jsonStringify y se asigna (se convierte en string con) -->JSON.stringify(value(objeto o un array))
   const jsonStringify= JSON.stringify(this.state.contactosAGuardar)
+  // se guarda con la linea de abajo.
   await AsyncStorage.setItem('Users', jsonStringify);
   /* 
      Alert:

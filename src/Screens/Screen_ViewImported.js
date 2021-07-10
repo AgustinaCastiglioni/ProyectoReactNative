@@ -47,10 +47,19 @@ console.log(e)
   }
 }
 
+/* Almacenamiento Local, evitas el uso de una base de datos.
+con el async getData se puede buscar las tarjetas guardadas en el almacenamiento local y mostrarlas en esta screen 
 
+*/
 async getData(){
     try{
+      //se usa la funcion de getItem de lo guardado en Screen_Import con storeData(de Screen_Import)
+      // se crea la variable resultado que espera(await) a que se obtenga lo guardado(getItem(en el getItem se usa la clave del storeData))
 const resultado= await AsyncStorage.getItem('Users')
+// se actualiza el estado con setState, con el parse se pasa al json a formato de objeto.
+// si se encuentra lo guardado se quiere actuaizar el estado con setState y se pone que el nuevo valor del array ImportedUsers.
+//para convertir al string en objeto se usa JSON.parse
+//se quiere actualizar el estado entonces se usa setState para guardar el string nuevo como objeto en el estado
 this.setState({importedUsers: JSON.parse(resultado), activity: false})
 
     }
