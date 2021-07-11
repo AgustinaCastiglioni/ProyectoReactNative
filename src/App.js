@@ -62,7 +62,31 @@ ambas propiedades se agregan al Stack.Screen,
 */
 const Stack= createStackNavigator();
 //abajo es el uso de la instalacion del drawer navigator
+// npm install @react-navigation/drawer
 import {createDrawerNavigator} from '@react-navigation/drawer';
+/* Drawer Navigator
+Se utiliza cuando hay muchas pantallas, hay un punto de referencia que permite que el usuario no se pierda en la navegacion
+se visualiza a traves de un boton o deslizando el dedo desde uno de los bordes de la aplicacion
+ la estructura es la misma que se menciono en las lineas 39 y 40 pero en vez de Stack.Navigator es Drawer.Navigator y en vez de Stack. Screen es Drawer.Screen
+ hay dos funciones que se usan para abrir y cerrar los drawers,
+ 1. this.props.navigation.openDrawer(), para abrir el menu hamburguesa
+ 2. navigation.closeDrawer()
+
+ propiedades de Drawer:
+ initialRouteName, define cual es la pantalla inicial
+ drawerPosition, si el drawer va de la izquierda o derecha
+ drawerType,como se ve vizualizar el drawer( front, back, slide, permanent)
+ minSwipeDistance, distancia minima para que aparezca el drawer
+ edgeWidth,distancia en la cual se debe activar el gesto para mostrar el drawer
+ overlayColor, en caso de querer cambiar el color de fondo al abrir el drawer
+
+drawerStyle para etilos del drawer
+drawerContentOptions, para ir cambiando cosas especificas del estilo
+
+
+
+ 
+*/
 const Drawer= createDrawerNavigator();
 
 export default class App extends Component {
