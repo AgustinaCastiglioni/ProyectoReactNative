@@ -68,7 +68,7 @@ this.setState({importedUsers: JSON.parse(resultado), activity: false})
     }
 }
 
-
+// funcion que muestra el modal.
 showModal(item){
   this.setState({showModal: true, selectedItem: item})
 }

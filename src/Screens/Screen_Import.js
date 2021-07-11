@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+//abajo se puede ver todos los componentes utilizados en este screen y son importados de react native
 import{
   View,
 Text,
@@ -47,6 +48,7 @@ componentDidMount(){
     fetch('https://randomuser.me/api/?results=' + this.state.numeroTarjetasImportadas)
     .then(response=> response.json())
     .then((result)=>{
+      // ACTIVITY INDICATOR, se puede ver abajo como se puso en false despues de haber realizado el fetch
       this.setState({users: result.results, activity: false})
     })
    }
@@ -255,7 +257,22 @@ componentDidMount(){
       </SafeAreaView>
       <View style={styles.view}>
       { this.state.activity 
+      //el ? y : son un if en linea donde explica que si no tengo los valores del fetch se muestra lo que inidica el ?(activity indicator) y cuando se encuentre todo del fetch indica lo que muesra el :(flatlist)
       ? <><Text>Buscando contactos...</Text>
+      {/* ActivityIndicator
+        sirve para mostrar una animacion al usuario mientras el dispositivo esta realizando un procesamiento
+        Generlmente se utiliza con un fetch
+        se puede usar otras maneras pero este es el mas facil en React Native
+        Propiedades:
+        size, sus valores pueden ser small y large, en android se puede dar valor numerico
+        color, color en letras o hexadecimal
+        animating, si se muestra la animacion, true o false
+        hidesWhenStopped, cuando no se anima se deja de visualizar true o false(solo en ios)
+
+        como se combina con accion de procesamiento:
+        1. se pasa al animating un estado por ej: this.state.activity
+        esto se puede cambiar cuando se haga el request, es decir, en el estado activity se encuentra en true pero al terminar algun request se pone en false.
+      */}
       <ActivityIndicator
       color='blue'
       size={60}
