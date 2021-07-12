@@ -1,5 +1,19 @@
+// se importa el StyleSheet para usar lo de React NATIVE
 import {StyleSheet} from 'react-native';
+/* Estilos
+todos los componentes principales aceptan la porpiedad llamada style
+la diferencia mas grande es en vez de usar el guion del medio en los nombres se usa camelCase
 
+Tipos de estilos:
+En Linea, ej: <Text style={{backgroundColor: 'blue', fonstSize: 22}}>, va con doble llave porque es un objeto literal dentro de una propiedad
+Objetos, ej: <Text style = {textStyles}> abajo va const textStyles = { color: 'blue',fontSize: 22}
+Hoja de Estilos, ej: const styles = StyleSheet.create({container:{backgroundColor: 'red'}}), es un archivo aparte que se importa como StyleSheet. en el codigo se anota como <Text style={styles.container}>
+*/
+
+/* Flexbox 
+flexbox es un algoritmo diseñado para que los componentes hijos puedan ser ubicados en la pantalla independientemente de la resolucion del dispositivo
+
+*/
 const styles= StyleSheet.create({
     view:{
       backgroundColor: 'rgb(47,48,77)',
@@ -97,4 +111,6 @@ const styles= StyleSheet.create({
       backgroundColor:'rgb(47,48,77)'
     }
     })
+    // se exporta para poder usar en los componentes
+    // despues se tiene que importar cada const para poder usarlos, import{styles} from '../Styles/Styles.js'
     export {styles}
